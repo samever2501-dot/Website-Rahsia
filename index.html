@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffe6eb;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ❤️ LOVE BESAR */
+.heart {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: red;
+    transform: rotate(-45deg);
+    animation: float 6s linear infinite;
+    opacity: 0.25;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -50px;
+    left: 0;
+}
+
+.heart::after {
+    left: 50px;
+    top: 0;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(-45deg); }
+    100% { transform: translateY(-20vh) rotate(-45deg); }
+}
+
+/* 📦 CENTER */
+#formBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+h2 {
+    color: #ff4d6d;
+}
+
+/* INPUT */
+input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 20px;
+    border: 2px solid #ff4d6d;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* MESSAGE */
+#message {
+    display: none;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* NAME */
+#username {
+    text-align: center;
+    color: #ff4d6d;
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px pink; }
+    to { text-shadow: 0 0 20px red; }
+}
+
+/* ENDING RED TEXT */
+#ending {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ❤️ 6 LOVE -->
+<div class="heart" style="left:5%; animation-delay:0s;"></div>
+<div class="heart" style="left:20%; animation-delay:2s;"></div>
+<div class="heart" style="left:35%; animation-delay:4s;"></div>
+<div class="heart" style="left:55%; animation-delay:1s;"></div>
+<div class="heart" style="left:70%; animation-delay:3s;"></div>
+<div class="heart" style="left:85%; animation-delay:5s;"></div>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgmusic" loop>
+    <source src="Blue .mp3" type="audio/mpeg">
+</audio>
+
+<!-- INPUT -->
+<div class="container" id="formBox">
+    <h2>Tulis Nama Kamu</h2>
+    <input type="text" id="name" placeholder="Nama kamu...">
+    <button onclick="start()">Submit</button>
+</div>
+
+<!-- MESSAGE -->
+<div class="container" id="message">
+    <h2 id="username"></h2>
+    <p id="text"></p>
+    <p id="ending"></p>
+</div>
+
+<script>
+function start() {
+    let name = document.getElementById("name").value;
+
+    if(name === "") {
+        alert("Isi nama dulu 😅");
+        return;
+    }
+
+    // 🎵 MUSIC PLAY
+    let music = document.getElementById("bgmusic");
+    music.volume = 0.4;
+    music.play();
+
+    // SET NAME
+    document.getElementById("username").innerHTML = "Haii " + name + " ❤️";
+
+    document.getElementById("formBox").style.display = "none";
+    document.getElementById("message").style.display = "block";
+
+   let msg = `
+Saya ada mau beritahu sesuatu kepada kau dan saya rasa ini adalah masa yang mungkin sesuai untuk saya ungkapkan kepada kau 💖
+
+Sebenarnya sejak pertama kali saya bertemu dengan kau dalam RSG kita saya rasa ada satu perkara yang tiba-tiba timbul dalam hati saya dan sejak daripada itu saya tidak dapat berhenti memikirkan kau sampai saya kurang tidur 😢
+
+Sebab kau terlalu jujur dalam sesi pertemuan kita, banyak kau cerita pasal family kau dan saya sangat minat untuk dengar cerita kau.
+
+Bukan sahaja itu, melalui pertemuan kita saya kenal kau ni orang yang sangat caring, loving person, independent woman dan sentiasa bangkit berdiri walaupun dunia ingin menjatuhkan kau.
+
+Sebenarnya banyak lagi tentang kau yang saya dapat nampak tapi itu sahaja yang dapat saya ungkapkan😊 Okay jadi tujuan saya buat ini website sebenarnya......
+Hmmmm...
+Hmmmm...
+Uhmmmmm.....
+`;
+ 
+    // 🔥 SLOWER TYPE EFFECT (supaya sempat baca)
+    typeEffect(msg, "text", () => {
+
+        // ⏳ delay 8 saat sebelum ayat merah
+        setTimeout(() => {
+            document.getElementById("ending").innerHTML =
+            "SAYA SUKA KAUU <br><br>" +
+            "Saya minta maaf kalau saya tidak dapat ungkapkan depan-depan sama kau sebab saya takut kau akan reject saya ba😅hehehe.<br>" +
+            "Kalau kau beri peluang sama saya, saya akan berusaha untuk sentiasa di sisi kau bila kau rasa diganggu dan akan menjadi pendengar terbaik untuk kau ❤️";
+        }, 8000);
+
+    });
+}
+
+/* SLOWER TYPING SPEED */
+function typeEffect(text, id, callback) {
+    let i = 0;
+
+    function typing() {
+        if (i < text.length) {
+            document.getElementById(id).innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 55); // 🔥 lebih lambat supaya senang baca
+        } else if(callback) {
+            callback();
+        }
+    }
+    typing();
+}
+</script>
+
+</body>
+</html>
