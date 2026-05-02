@@ -2,95 +2,65 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Envelope 💌</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: #ffe6eb;
-    overflow: hidden;
-
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;
 }
 
-/* ❤️ LOVE BESAR */
+/* HEARTS */
 .heart {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background: red;
     transform: rotate(-45deg);
     animation: float 6s linear infinite;
-    opacity: 0.25;
+    opacity: 0.2;
 }
 
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background: red;
     border-radius: 50%;
 }
 
-.heart::before {
-    top: -50px;
-    left: 0;
-}
-
-.heart::after {
-    left: 50px;
-    top: 0;
-}
+.heart::before { top: -40px; left: 0; }
+.heart::after { left: 40px; top: 0; }
 
 @keyframes float {
     0% { transform: translateY(100vh) rotate(-45deg); }
     100% { transform: translateY(-20vh) rotate(-45deg); }
 }
 
-/* 📦 CENTER */
-#formBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    position: relative;
-    z-index: 10;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+/* INPUT */
+.inputBox {
     text-align: center;
 }
 
-h2 {
-    color: #ff4d6d;
-}
-
-/* INPUT */
 input {
     padding: 10px;
-    width: 80%;
     border-radius: 20px;
     border: 2px solid #ff4d6d;
     text-align: center;
-    display: block;
-    margin: 0 auto;
 }
 
 button {
-    margin-top: 15px;
-    padding: 10px 20px;
+    margin-top: 10px;
+    padding: 8px 20px;
     border: none;
     background: #ff4d6d;
     color: white;
@@ -98,134 +68,295 @@ button {
     cursor: pointer;
 }
 
-/* MESSAGE */
-#message {
+/* ENVELOPE */
+.envelope {
+    width: 200px;
+    height: 130px;
+    background: #ff4d6d;
+    position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* SHAKE */
+.shake1 { animation: s1 0.4s; }
+@keyframes s1 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake2 { animation: s2 0.4s; }
+@keyframes s2 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+/* BURST */
+.burst {
+    animation: burst 0.6s ease forwards;
+}
+
+@keyframes burst {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* LETTER */
+.letter {
     display: none;
-    text-align: left;
-    font-size: 14px;
-    line-height: 1.6;
+    width: 380px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 /* NAME */
-#username {
+#name {
     text-align: center;
-    color: #ff4d6d;
-    margin-bottom: 15px;
     font-size: 22px;
+    color: #ff4d6d;
     font-weight: bold;
-    animation: glow 2s infinite alternate;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 5px pink; }
-    to { text-shadow: 0 0 20px red; }
+/* TEXT */
+#text {
+    font-size: 14px;
+    line-height: 1.8;
 }
 
-/* ENDING RED TEXT */
-#ending {
-    font-size: 16px;
+/* SPECIAL */
+.like {
+    font-size: 30px;
+    font-weight: bold;
+    color: pink;
+    -webkit-text-stroke: 1px red;
     text-align: center;
-    margin-top: 20px;
-    color: red;
-    font-weight: bold;
+    margin: 15px 0;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ❤️ 6 LOVE -->
-<div class="heart" style="left:5%; animation-delay:0s;"></div>
-<div class="heart" style="left:20%; animation-delay:2s;"></div>
-<div class="heart" style="left:35%; animation-delay:4s;"></div>
-<div class="heart" style="left:55%; animation-delay:1s;"></div>
+<!-- HEARTS -->
+<div class="heart" style="left:10%"></div>
+<div class="heart" style="left:30%; animation-delay:2s;"></div>
+<div class="heart" style="left:50%; animation-delay:1s;"></div>
 <div class="heart" style="left:70%; animation-delay:3s;"></div>
-<div class="heart" style="left:85%; animation-delay:5s;"></div>
+<div class="heart" style="left:85%; animation-delay:4s;"></div>
 
-<!-- 🎵 MUSIC -->
+<!-- INPUT -->
+<div id="inputScreen" class="inputBox">
+    <h2>Tulis Nama 💌</h2>
+    <input id="nameInput" placeholder="Nama kamu...">
+    <br>
+    <button onclick="openEnvelope()">Submit</button>
+</div>
+
+<!-- ENVELOPE -->
+<div id="envelope" class="envelope" style="display:none;" onclick="clickEnvelope()"></div>
+
+<!-- LETTER -->
+<div class="letter" id="letter">
+    <div id="name"></div>
+    <div id="text"></div>
+
+    <!-- YES / NO -->
+    <div id="choiceBox" style="display:none; text-align:center; margin-top:15px;">
+        <h3>Do you feel the same? 💌</h3>
+
+        <button onclick="acceptLove()" 
+        style="margin:5px; padding:10px 20px; background:#ff4d6d; color:white; border:none; border-radius:20px;">
+            YES 💖
+        </button>
+
+        <button onclick="rejectLove()" 
+        style="margin:5px; padding:10px 20px; background:#444; color:white; border:none; border-radius:20px;">
+            NO 💔
+        </button>
+    </div>
+</div>
+
+<!-- MUSIC -->
 <audio id="bgmusic" loop>
     <source src="Blue .mp3" type="audio/mpeg">
 </audio>
 
-<!-- INPUT -->
-<div class="container" id="formBox">
-    <h2>Tulis Nama Kamu</h2>
-    <input type="text" id="name" placeholder="Nama kamu...">
-    <button onclick="start()">Submit</button>
-</div>
-
-<!-- MESSAGE -->
-<div class="container" id="message">
-    <h2 id="username"></h2>
-    <p id="text"></p>
-    <p id="ending"></p>
-</div>
-
 <script>
-function start() {
-    let name = document.getElementById("name").value;
 
-    if(name === "") {
-        alert("Isi nama dulu 😅");
-        return;
+let clickCount = 0;
+
+function openEnvelope() {
+    let name = document.getElementById("nameInput").value;
+    if(name === "") return alert("Isi nama dulu 😅");
+
+    document.getElementById("inputScreen").style.display = "none";
+    document.getElementById("envelope").style.display = "block";
+
+    window.userName = name;
+}
+
+function clickEnvelope() {
+    let env = document.getElementById("envelope");
+
+    clickCount++;
+
+    if(clickCount === 1) {
+        env.classList.add("shake1");
+        setTimeout(() => env.classList.remove("shake1"), 400);
     }
 
-    // 🎵 MUSIC PLAY
-    let music = document.getElementById("bgmusic");
-    music.volume = 0.4;
-    music.play();
+    else if(clickCount === 2) {
+        env.classList.add("shake2");
+        setTimeout(() => env.classList.remove("shake2"), 400);
+    }
 
-    // SET NAME
-    document.getElementById("username").innerHTML = "Haii " + name + " ❤️";
+    else if(clickCount === 3) {
+        env.classList.add("burst");
 
-    document.getElementById("formBox").style.display = "none";
-    document.getElementById("message").style.display = "block";
+        setTimeout(() => {
+            env.style.display = "none";
+            document.getElementById("letter").style.display = "block";
+            document.getElementById("name").innerHTML = "Haii " + window.userName;
 
-   let msg = `
-Saya ada mau beritahu sesuatu kepada kau dan saya rasa ini adalah masa yang mungkin sesuai untuk saya ungkapkan kepada kau 💖
+            let music = document.getElementById("bgmusic");
+            music.volume = 0.4;
+            music.play().catch(e => console.log("Autoplay blocked"));
 
-Sebenarnya sejak pertama kali saya bertemu dengan kau dalam RSG kita saya rasa ada satu perkara yang tiba-tiba timbul dalam hati saya dan sejak daripada itu saya tidak dapat berhenti memikirkan kau sampai saya kurang tidur 😢
+            typeText(fullText);
+        }, 600);
+    }
+}
 
-Sebab kau terlalu jujur dalam sesi pertemuan kita, banyak kau cerita pasal family kau dan saya sangat minat untuk dengar cerita kau.
+/* FULL TEXT (TIDAK DIUBAH) */
+let fullText = `
+My heart has been whispering something to me this day, and i think it's finally time to tell youu...
 
-Bukan sahaja itu, melalui pertemuan kita saya kenal kau ni orang yang sangat caring, loving person, independent woman dan sentiasa bangkit berdiri walaupun dunia ingin menjatuhkan kau.
+i just can't stop thinking about how amazing you are,
+You're honestly so attractive, independent person that always stand up when you're down, caring, and also loving person to your beatiful nephews.
+I also love your story about your Family and i like to hear it more with your sabahan slang...
+but 
+its more than just that,
 
-Sebenarnya banyak lagi tentang kau yang saya dapat nampak tapi itu sahaja yang dapat saya ungkapkan😊 Okay jadi tujuan saya buat ini website sebenarnya......
+There's something about you keeps me thinking
+about you all  the time.
+
 Hmmmm...
 Hmmmm...
 Uhmmmmm.....
+
+Actually I LIKE YOU
+
+For so many reasons
+i like everything about you from your story, your imperfections and the way they 
+make you so perfectly you.
+I love your personality, your vibe, and how you just light
+up everything around you
+Your style is effortless and your smile...it just makes 
+everything better.
+
+I made this code just to show you how deeply i'm in love with 
+you. Every line of it reflects how i feel about you..
+
+But no pressure, okay
+You don't have to feel the same way..
+I just needed to get this off my chest for my own peace
+of mind
+Take Care☺️☺️....
 `;
- 
-    // 🔥 SLOWER TYPE EFFECT (supaya sempat baca)
-    typeEffect(msg, "text", () => {
 
-        // ⏳ delay 8 saat sebelum ayat merah
-        setTimeout(() => {
-            document.getElementById("ending").innerHTML =
-            "SAYA SUKA KAUU <br><br>" +
-            "Saya minta maaf kalau saya tidak dapat ungkapkan depan-depan sama kau sebab saya takut kau akan reject saya ba😅hehehe.<br>" +
-            "Kalau kau beri peluang sama saya, saya akan berusaha untuk sentiasa di sisi kau bila kau rasa diganggu dan akan menjadi pendengar terbaik untuk kau ❤️";
-        }, 8000);
+function typeText(text) {
+    let box = document.getElementById("text");
+    box.innerHTML = "";
 
-    });
-}
-
-/* SLOWER TYPING SPEED */
-function typeEffect(text, id, callback) {
+    let lines = text.split("\n").filter(l => l.trim() !== "");
     let i = 0;
+    let likeShown = false;
 
-    function typing() {
-        if (i < text.length) {
-            document.getElementById(id).innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, 55); // 🔥 lebih lambat supaya senang baca
-        } else if(callback) {
-            callback();
+    function showLine() {
+
+        if(i >= lines.length) {
+            document.getElementById("choiceBox").style.display = "block";
+            return;
         }
+
+        let line = lines[i];
+        let div = document.createElement("div");
+        box.appendChild(div);
+
+        let j = 0;
+
+        function typeChar() {
+            if(j < line.length) {
+                div.innerHTML += line.charAt(j);
+                j++;
+                setTimeout(typeChar, 35);
+            } else {
+
+                if(!likeShown && line.includes("Actually I LIKE YOU")) {
+
+                    likeShown = true;
+
+                    setTimeout(() => {
+                        div.innerHTML = "";
+                        div.className = "like";
+                        div.innerHTML = " I LIKE YOU";
+
+                        i++;
+                        setTimeout(showLine, 1200);
+
+                    }, 8000);
+
+                    return;
+                }
+
+                i++;
+                setTimeout(showLine, 900);
+            }
+        }
+
+        typeChar();
     }
-    typing();
+
+    showLine();
 }
+
+/* 💖 YES → WHATSAPP */
+function acceptLove() {
+    document.getElementById("choiceBox").style.display = "none";
+
+    document.getElementById("text").innerHTML = `
+        <h2 style="color:pink; -webkit-text-stroke:1px red; font-size:30px;">
+            Opening WhatsApp 💖
+        </h2>
+        <p style="text-align:center;">Sending your response...</p>
+    `;
+
+    let phone = "60179063170";
+
+    let message = encodeURIComponent(
+        "Hi 💖 I just want to say YES... I feel the same way too 😊"
+    );
+
+    setTimeout(() => {
+        window.open(`https://wa.me/${0179063170}?text=${message}`, "_blank");
+    }, 1500);
+}
+
+/* 💔 NO */
+function rejectLove() {
+    document.getElementById("choiceBox").style.display = "none";
+
+    document.getElementById("text").innerHTML = `
+        <h2 style="color:gray;">She said NO 💔</h2>
+        <p style="text-align:center;">I understand... I respect your feelings 🤍</p>
+    `;
+}
+
 </script>
 
 </body>
