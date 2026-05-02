@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Envelope 💌</title> 
+<title>Love Envelope 💌</title>
 
 <style>
 body {
-    margin: 0; 
+    margin: 0;
     font-family: Arial;
     background: #ffe6eb;
     height: 100vh;
@@ -288,14 +288,23 @@ function typeText(text) {
         let div = document.createElement("div");
         box.appendChild(div);
 
-        let j = 0;
+            let j = 0;
 
         function typeChar() {
+
+            // 💖 SLOW TYPING EFFECT
+            let speed = 70; // semua ayat jadi lebih slow
+
+            if(line.length > 60) {
+                speed = 100; // ayat panjang lagi slow
+            }
+
             if(j < line.length) {
                 div.innerHTML += line.charAt(j);
                 j++;
-                setTimeout(typeChar, 60);
+                setTimeout(typeChar, speed);
             } else {
+
 
                 if(!likeShown && line.includes("Actually I LIKE YOU")) {
 
